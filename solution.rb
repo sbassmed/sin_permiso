@@ -1,14 +1,15 @@
 require 'sinatra'
+require 'net/http'
 
 get '/' do
 
     if autorizado?
-         env['permiso'] ==  'Si lo logramos!'
+         body "Si lo logramos!"
     else
-        env['permiso'] ==  'Sin Permiso'
+        body "Sin Permiso"
     end
 end
 
 def autorizado?
-   env['permiso'] == 'soy-un-token-secreto'
+  request.env['HTTP_PERMISO'] == 'soy-un-token-secreto'
 end
