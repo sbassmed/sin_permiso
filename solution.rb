@@ -3,14 +3,12 @@ require 'sinatra'
 get '/' do
 
     if autorizado?
-         erb :index
-         body 'Si lo logramos!'
+         env['permiso'] ==  'Si lo logramos!'
     else
-        redirect "/denied"
-        body 'Sin Permiso'
+        env['permiso'] ==  'Sin Permiso'
     end
 end
 
 def autorizado?
-   headers ['HTTP_PERMISO'] == 'soy-un-token-secreto'
+   env['permiso'] == 'soy-un-token-secreto'
 end
